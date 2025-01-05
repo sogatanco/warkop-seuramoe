@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['message' => 'CSRF cookie set']);
@@ -31,5 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/product/{id}/status', [ProductController::class, 'updateStatus'])->middleware('role:admin');
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->middleware('role:admin');
     Route::put('/product/{id}', [ProductController::class, 'update'])->middleware('role:admin');
+
+    Route::post('/transactions', [TransactionController::class, 'add'])->middleware('role:kasir');
+    Route::put('/product/{id}/add-stock', [ProductController::class, 'addStock'])->middleware('role:kasir');
 });
 

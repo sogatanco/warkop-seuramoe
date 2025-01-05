@@ -25,6 +25,7 @@ class TransactionItem extends Model
         'transaction_id',
         'jumlah',
         'harga',
+        'product_id',
     ];
 
     /**

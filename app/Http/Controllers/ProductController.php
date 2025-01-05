@@ -157,7 +157,7 @@ class ProductController extends Controller
 
                 // Menyimpan gambar di storage
                 Storage::disk('public')->put('gambar_produk/' . $imageName, base64_decode($image));
-                $product->gambar = 'gambar_produk/' . $imageName; 
+                $product->gambar = 'gambar_produk/' . $imageName;
             }
 
             $product->save();
@@ -179,5 +179,30 @@ class ProductController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function addStock(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Produk tidak ditemukan',
+            ], 404);
+        }
+
+        $request->validate([
+            'stok' => 'required|integer|min:1',
+        ]);
+
+        // Update stok produk
+        $product->stok += $request->stok;
+        $product->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Stok produk berhasil diperbarui.',
+            'data' => $product,
+        ]);
     }
 }
