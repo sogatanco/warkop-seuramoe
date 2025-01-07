@@ -35,5 +35,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/transactions', [TransactionController::class, 'add'])->middleware('role:kasir');
     Route::put('/product/{id}/add-stock', [ProductController::class, 'addStock'])->middleware('role:kasir');
+    Route::get('/total-transaksi/{month}/{year}', [TransactionController::class, 'getTotalPerHari'])->middleware('role:admin');
+    Route::get('/total-all', [TransactionController::class, 'getTransactionData'])->middleware('role:admin');
+
+    Route::get('transactions', [TransactionController::class, 'listTransactionItem']);
 });
 

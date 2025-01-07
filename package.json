@@ -6,7 +6,11 @@
     },
     "devDependencies": {
         "axios": "^1.1.2",
+        "laravel-mix": "^6.0.49",
         "laravel-vite-plugin": "^0.7.2",
-        "vite": "^4.0.0"
+        "vite": "^4.0.0",
+        "webpack": "^5.97.1",
+        "webpack-cli": "^6.0.1",
+        "webpack-dev-server": "^5.2.0"
     }
 }
